@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  database:
+    image: postgres:13
+    ports:
+      - "127.0.0.1:5532:5432"
+    environment:
+      POSTGRES_DB: springapi
+      POSTGRES_USER: springapi
+      POSTGRES_PASSWORD: springapi

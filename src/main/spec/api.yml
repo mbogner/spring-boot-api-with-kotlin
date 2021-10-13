@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: spring-api
+  version: v1
+servers:
+  - url: https://localhost:8080
+paths:
+  /api/v1/example:
+    post:
+      summary: create new entry
+      operationId: createExample
+      tags:
+        - example
+      parameters:
+        - $ref: "#/components/parameters/apiKeyRequired"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExampleNew"
+      security:
+        - ApiKeyAuth: []
+      responses:
+        "200":
+          description: "Response object"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        default:
+          description: "unexpected error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  parameters:
+    apiKeyRequired:
+      in: "header"
+      name: "X-API-Key"
+      description: "uuid key of the tenant"
+      required: true
+      schema:
+        type: "string"
+        format: "uuid"
+  schemas:
+    ExampleNew:
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 254
+    Example:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          minLength: 1
+          maxLength: 254
+    ErrorArgument:
+      properties:
+        key:
+          type: "string"
+        value:
+          type: "string"
+        type:
+          type: "string"
+      required:
+        - "key"
+        - "type"
+    Error:
+      properties:
+        time:
+          type: "string"
+          format: "date-time"
+        code:
+          type: "string"
+        title:
+          type: "string"
+        message:
+          type: "string"
+        args:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ErrorArgument"
+      required:
+        - "time"
+        - "code"
+        - "title"
+        - "message"
