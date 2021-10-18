@@ -10,5 +10,6 @@ interface ExampleMapStructMapper {
 
     fun mapNewDtoToEntity(dto: ExampleNewDto): Example
     fun mapEntityToNewDto(entity: Example): ExampleDto
+    fun mapEntityToNewDto(entity: List<Example>): List<ExampleDto>
 
 }

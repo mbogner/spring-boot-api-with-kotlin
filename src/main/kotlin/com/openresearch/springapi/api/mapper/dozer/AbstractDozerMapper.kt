@@ -11,4 +11,8 @@ abstract class AbstractDozerMapper constructor(
         return mapper.map(entity, dtoClass)
     }
 
+    fun <E, D> mapToList(entities: Collection<E>, dtoClass: Class<D>): List<D> {
+        return entities.map { e -> mapper.map(e, dtoClass) }
+    }
+
 }

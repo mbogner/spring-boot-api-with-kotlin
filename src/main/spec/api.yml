@@ -8,6 +8,7 @@ paths:
   /api/v1/example:
     post:
       summary: create new entry
+      description: Method to create a new example.
       operationId: createExample
       tags:
         - example
@@ -22,12 +23,35 @@ paths:
       security:
         - ApiKeyAuth: []
       responses:
-        "200":
+        "201":
           description: "Response object"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Example"
+        default:
+          description: "unexpected error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: get all examples
+      description: Method to get a list of all examples.
+      operationId: readExamples
+      tags:
+        - example
+      parameters:
+        - $ref: "#/components/parameters/apiKeyRequired"
+      security:
+        - ApiKeyAuth: [ ]
+      responses:
+        "200":
+          description: "Response object"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExampleList"
         default:
           description: "unexpected error"
           content:
@@ -51,12 +75,14 @@ components:
         format: "uuid"
   schemas:
     ExampleNew:
+      description: DTO for creating a new example.
       properties:
         name:
           type: string
           minLength: 1
           maxLength: 254
     Example:
+      description: DTO with all fields.
       properties:
         id:
           type: string
@@ -65,7 +91,24 @@ components:
           type: string
           minLength: 1
           maxLength: 254
+        lock_version:
+          type: integer
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    ExampleList:
+      description: Listing of examples.
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Example'
     ErrorArgument:
+      description: Arguments used in the error message.
       properties:
         key:
           type: "string"
@@ -77,6 +120,7 @@ components:
         - "key"
         - "type"
     Error:
+      description: Custom error object with translated messages.
       properties:
         time:
           type: "string"

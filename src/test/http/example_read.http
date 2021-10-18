@@ -1,0 +1,3 @@
+GET {{apiv1}}/example
+Content-Type: application/json
+X-API-Key: {{$uuid}}

@@ -36,7 +36,6 @@ enum class ApiErrorCode(
     ;
 
     companion object {
-
         private const val TITLE = "TITLE"
         private const val MESSAGE = "MESSAGE"
     }

@@ -22,4 +22,9 @@ class ExampleService @Autowired constructor(
         return created
     }
 
+    @Transactional(Transactional.TxType.SUPPORTS)
+    fun readAllExamples(): List<Example> {
+        return repository.findAll()
+    }
+
 }
