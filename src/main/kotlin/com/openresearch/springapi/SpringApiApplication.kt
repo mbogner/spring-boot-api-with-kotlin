@@ -1,6 +1,6 @@
 package com.openresearch.springapi
 
-import com.openresearch.springapi.repo.ExampleRepository
+import com.openresearch.springapi.repo.BreweryRepository
 import com.openresearch.springapi.repo.base.ExtendedJpaRepositoryImpl
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 @EnableTransactionManagement
 @EnableJpaRepositories(
     basePackageClasses = [
-        ExampleRepository::class,
+        BreweryRepository::class,
     ],
     repositoryBaseClass = ExtendedJpaRepositoryImpl::class
 )

@@ -1,12 +1,12 @@
 package com.openresearch.springapi.api
 
-import com.openresearch.springapi.api.mapper.dozer.ExampleDozerMapper
-import com.openresearch.springapi.api.mapper.mapstruct.ExampleMapStructMapper
+import com.openresearch.springapi.api.mapper.dozer.BreweryDozerMapper
+import com.openresearch.springapi.api.mapper.mapstruct.BreweryMapStructMapper
 import com.openresearch.springapi.logging.LoggedMethod
-import com.openresearch.springapi.model.ExampleDto
-import com.openresearch.springapi.model.ExampleListDto
-import com.openresearch.springapi.model.ExampleNewDto
-import com.openresearch.springapi.service.ExampleService
+import com.openresearch.springapi.model.BreweryDto
+import com.openresearch.springapi.model.BreweryListDto
+import com.openresearch.springapi.model.BreweryNewDto
+import com.openresearch.springapi.service.BreweryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,27 +19,27 @@ import javax.transaction.Transactional
  */
 @Component
 class ExampleApiDelegateImpl @Autowired constructor(
-    private val exampleService: ExampleService,
-    private val exampleDozerMapper: ExampleDozerMapper,
-    private val exampleMapStructMapper: ExampleMapStructMapper,
-) : ExampleApiDelegate {
+    private val breweryService: BreweryService,
+    private val exampleDozerMapper: BreweryDozerMapper,
+    private val breweryMapStructMapper: BreweryMapStructMapper,
+) : BreweryApiDelegate {
 
     @LoggedMethod
     @Transactional
-    override fun createExample(
+    override fun createBrewery(
         xApiKey: UUID,
-        requestBody: ExampleNewDto
-    ): ResponseEntity<ExampleDto> {
-        val created = exampleService.createExample(exampleMapStructMapper.mapNewDtoToEntity(requestBody))
-        val dto = exampleMapStructMapper.mapEntityToNewDto(created)
+        requestBody: BreweryNewDto
+    ): ResponseEntity<BreweryDto> {
+        val created = breweryService.createBrewery(breweryMapStructMapper.mapNewDtoToEntity(requestBody))
+        val dto = breweryMapStructMapper.mapEntityToNewDto(created)
         return ResponseEntity.status(HttpStatus.CREATED).body(dto)
     }
 
     @LoggedMethod
-    override fun readExamples(xAPIKey: UUID?): ResponseEntity<ExampleListDto> {
-        val examples = exampleService.readAllExamples()
-        val dtos = exampleDozerMapper.mapToList(examples, ExampleDto::class.java)
-        return ResponseEntity.ok(ExampleListDto().content(dtos))
+    override fun readBreweries(xAPIKey: UUID?): ResponseEntity<BreweryListDto> {
+        val examples = breweryService.readAllBreweries()
+        val dtos = exampleDozerMapper.mapToList(examples, BreweryDto::class.java)
+        return ResponseEntity.ok(BreweryListDto().content(dtos))
     }
 
 }

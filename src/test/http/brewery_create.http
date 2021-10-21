@@ -1,4 +1,4 @@
-POST {{apiv1}}/example
+POST {{apiv1}}/brewery
 Content-Type: application/json
 X-API-Key: {{$uuid}}
 

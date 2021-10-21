@@ -11,8 +11,8 @@ import javax.persistence.Table
 import javax.validation.constraints.NotBlank
 
 @Entity
-@Table(name = "examples")
-class Example : AbstractVersionedMutableEntity<UUID>() {
+@Table(name = "breweries")
+class Brewery : AbstractVersionedMutableEntity<UUID>() {
 
     @Id
     @GeneratedValue(generator = AssignableUUIDGenerator.NAME)

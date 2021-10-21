@@ -5,13 +5,13 @@ info:
 servers:
   - url: https://localhost:8080
 paths:
-  /api/v1/example:
+  /api/v1/brewery:
     post:
-      summary: create new entry
-      description: Method to create a new example.
-      operationId: createExample
+      summary: create brewery
+      description: Method to create a new brewery.
+      operationId: createBrewery
       tags:
-        - example
+        - Brewery
       parameters:
         - $ref: "#/components/parameters/apiKeyRequired"
       requestBody:
@@ -19,16 +19,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ExampleNew"
+              $ref: "#/components/schemas/BreweryNew"
       security:
-        - ApiKeyAuth: []
+        - ApiKeyAuth: [ ]
       responses:
         "201":
           description: "Response object"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Example"
+                $ref: "#/components/schemas/Brewery"
         default:
           description: "unexpected error"
           content:
@@ -36,11 +36,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     get:
-      summary: get all examples
-      description: Method to get a list of all examples.
-      operationId: readExamples
+      summary: get breweries
+      description: Method to get a list of all breweries in the system.
+      operationId: readBreweries
       tags:
-        - example
+        - Brewery
       parameters:
         - $ref: "#/components/parameters/apiKeyRequired"
       security:
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExampleList"
+                $ref: "#/components/schemas/BreweryList"
         default:
           description: "unexpected error"
           content:
@@ -74,14 +74,14 @@ components:
         type: "string"
         format: "uuid"
   schemas:
-    ExampleNew:
+    BreweryNew:
       description: DTO for creating a new example.
       properties:
         name:
           type: string
           minLength: 1
           maxLength: 254
-    Example:
+    Brewery:
       description: DTO with all fields.
       properties:
         id:
@@ -100,13 +100,13 @@ components:
         updated_at:
           type: string
           format: date-time
-    ExampleList:
+    BreweryList:
       description: Listing of examples.
       properties:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/Example'
+            $ref: '#/components/schemas/Brewery'
     ErrorArgument:
       description: Arguments used in the error message.
       properties:

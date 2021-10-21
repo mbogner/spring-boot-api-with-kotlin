@@ -1,5 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="example_read#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/src/test/http/example_read.http" runType="Run single request">
-    <method v="2" />
-  </configuration>
-</component>

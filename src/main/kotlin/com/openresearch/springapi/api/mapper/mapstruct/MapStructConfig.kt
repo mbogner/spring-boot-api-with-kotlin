@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration
 class MapStructConfig {
 
     @Bean
-    fun exampleMapStructMapper(): ExampleMapStructMapper {
-        return Mappers.getMapper(ExampleMapStructMapper::class.java)
+    fun exampleMapStructMapper(): BreweryMapStructMapper {
+        return Mappers.getMapper(BreweryMapStructMapper::class.java)
     }
 
 }
